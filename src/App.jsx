@@ -12,11 +12,11 @@ export const App = () => {
   const [contacts, setContacts] = useState(() => {
     return JSON.parse(localStorage.getItem('contacts')) ?? [];
   });
-  const [filter] = useState('');
+  const [filter, setFilter] = useState('');
 
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
-  });
+  }, [contacts]);
 
   const addContact = data => {
     const nameRepeated = contacts.find(
@@ -33,9 +33,7 @@ export const App = () => {
   };
 
   const handleChange = ({ target }) => {
-    setContacts({
-      [target.name]: target.value,
-    });
+    setFilter(target.value);
   };
 
   const getFilteredContacts = () => {
